@@ -1,7 +1,11 @@
-package com.PhSystem.BackEnd.Mqtt;
+package com.PhSystem.BackEnd;
 
 
+import com.PhSystem.BackEnd.Models.Log;
+import com.PhSystem.BackEnd.Repo.LogRepo;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -9,6 +13,7 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.core.MessageProducer;
 import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
 import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
+import org.springframework.integration.mqtt.event.MqttConnectionFailedEvent;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
@@ -18,8 +23,13 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
 
+import java.util.Date;
+
 @Configuration
-public class MqttConfig {
+public class MqttHandler {
+
+    @Autowired
+    private LogRepo logRepo;
 
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
@@ -40,8 +50,9 @@ public class MqttConfig {
         return new DirectChannel();
     }
 
+
     @Bean
-    public MessageProducer inbound() {
+    public MessageProducer inbound(){
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter("serverIn",
                 mqttClientFactory(), "sensor/log");
 
@@ -51,6 +62,7 @@ public class MqttConfig {
         adapter.setOutputChannel(mqttInputChannel());
         return adapter;
     }
+
 
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
@@ -66,6 +78,13 @@ public class MqttConfig {
                 {
                     System.out.println(a);
                 }
+                System.out.println(para[0]);
+                System.out.println(Integer.parseInt(para[1]));
+                System.out.println(Float.parseFloat(para[2]));
+
+                Log log = new Log(para[0], Integer.parseInt(para[1]), Float.parseFloat(para[2]), new Date());
+                logRepo.save(log);
+                System.out.println("Saved with success");
 
             }
         };

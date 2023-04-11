@@ -1,4 +1,4 @@
-package com.PhSystem.BackEnd.Mqtt;
+package com.PhSystem.BackEnd;
 
 
 import org.springframework.integration.annotation.MessagingGateway;

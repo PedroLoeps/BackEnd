@@ -12,7 +12,7 @@ public class CanView {
     private Integer id;
 
     @Column(name = "Client")
-    private int client;
+    private String client;
 
     @Column(name = "Sensor")
     private String sensor;
@@ -28,11 +28,11 @@ public class CanView {
         this.id = id;
     }
 
-    public int getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(int client) {
+    public void setClient(String client) {
         this.client = client;
     }
 

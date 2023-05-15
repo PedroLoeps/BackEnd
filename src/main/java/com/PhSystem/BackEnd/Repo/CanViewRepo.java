@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CanViewRepo  extends JpaRepository<CanView, Integer> {
 
-    List<CanView> findByClient(int client);
+    List<CanView> findByClient(String client);
 }

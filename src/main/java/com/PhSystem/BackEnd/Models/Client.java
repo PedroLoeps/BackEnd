@@ -8,28 +8,21 @@ import jakarta.persistence.*;
 public class Client {
 
     @Id
-    @Column(name = "Client_Id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
     @Column(name = "Username")
     private String name;
 
     @Column(name = "Passw")
     private String password;
 
-    @Column(name = "Permissions")
-    private int permissions;
+    @Column(name = "Perm_level")
+    private int perm_level;
+
+    @Column(name = "Email")
+    private String email;
+
+
 
     public Client() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -49,10 +42,18 @@ public class Client {
     }
 
     public int getPermissions() {
-        return permissions;
+        return perm_level;
     }
 
-    public void setPermissions(int permissions) {
-        this.permissions = permissions;
+    public void setPermissions(int perm_level) {
+        this.perm_level = perm_level;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

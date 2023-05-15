@@ -1,10 +1,7 @@
 package com.PhSystem.BackEnd.Controller;
 
-import com.PhSystem.BackEnd.Models.Log;
+
 import com.PhSystem.BackEnd.Models.Sensor;
-import com.PhSystem.BackEnd.Repo.LogRepo;
-import com.PhSystem.BackEnd.Repo.SensorRepo;
-import com.PhSystem.BackEnd.Service.EmailService;
 import com.PhSystem.BackEnd.Service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +34,8 @@ public class SensorController {
         return sensorService.getSensors();
     }
 
-    @GetMapping(value = "{clientId}")
-    public List<Sensor> getClientSensors(@PathVariable("clientId") int clientId) {
+    @GetMapping(value = "/{clientId}")
+    public List<Sensor> getClientSensors(@PathVariable("clientId") String clientId) {
         return sensorService.getClientSensors(clientId);
 
     /*

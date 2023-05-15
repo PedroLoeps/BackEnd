@@ -2,7 +2,9 @@ package com.PhSystem.BackEnd.Models;
 
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -20,8 +22,11 @@ public class Log {
     @Column(name = "Temp")
     private int temp;
 
-    @Column(name = "Ph")
-    private float ph;
+    @Column(name = "Ph_Entry")
+    private float ph_entry;
+
+    @Column(name = "Ph_Exit")
+    private float ph_exit;
 
     @Column(name = "Log_Time")
     private Date time;
@@ -30,10 +35,11 @@ public class Log {
 
     }
 
-    public Log(String sensor, int temp, float ph, Date time) {
+    public Log(String sensor, int temp, float ph_entry, float ph_exit, Date time) {
         this.sensor = sensor;
         this.temp = temp;
-        this.ph = ph;
+        this.ph_entry = ph_entry;
+        this.ph_exit = ph_exit;
         this.time = time;
     }
 
@@ -50,7 +56,7 @@ public class Log {
     }
 
     public void setSensor(String sensor) {
-        sensor = sensor;
+        this.sensor = sensor;
     }
 
     public int getTemp() {
@@ -58,15 +64,23 @@ public class Log {
     }
 
     public void setTemp(int temp) {
-        temp = temp;
+        this.temp = temp;
     }
 
-    public float getPh() {
-        return ph;
+    public float getPh_entry() {
+        return ph_entry;
     }
 
-    public void setPh(float ph) {
-        ph = ph;
+    public void setPh_entry(float ph_entry) {
+        this.ph_entry = ph_entry;
+    }
+
+    public float getPh_exit() {
+        return ph_exit;
+    }
+
+    public void setPh_exit(float ph_exit) {
+        this.ph_exit = ph_ext;
     }
 
     public Date getTime() {
@@ -74,6 +88,6 @@ public class Log {
     }
 
     public void setTime(Date time) {
-        time = time;
+        this.time = time;
     }
 }

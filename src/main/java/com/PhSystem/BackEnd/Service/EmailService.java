@@ -1,6 +1,5 @@
 package com.PhSystem.BackEnd.Service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,7 +13,7 @@ public class EmailService {
 
     public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("randomstuff.crapmails@gmail.com");
+        message.setFrom("ph.system.alarms@gmail.com");
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);

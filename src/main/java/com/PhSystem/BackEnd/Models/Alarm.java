@@ -26,6 +26,12 @@ public class Alarm {
     public Alarm() {
     }
 
+    public Alarm(String sensor, int alarmType, Date time) {
+        this.sensor = sensor;
+        this.alarmType = alarmType;
+        this.time = time;
+    }
+
     public Integer getId() {
         return id;
     }

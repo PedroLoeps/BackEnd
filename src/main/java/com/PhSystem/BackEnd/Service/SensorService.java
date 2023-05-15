@@ -8,6 +8,7 @@ import com.PhSystem.BackEnd.Repo.SensorRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SensorService {
@@ -25,11 +26,11 @@ public class SensorService {
         return sensorRepo.findAll();
     }
 
-    public List<Sensor> getClientSensors(int clientId) {
+    public List<Sensor> getClientSensors(String clientId) {
         List<Sensor> clientSensors = sensorRepo.findByClient(clientId);
 
-        List<CanView> canViewSensor = canViewRepo.findByClient(clientId);
-        for(CanView sensor : canViewSensor) {
+        List<CanView> canViewSensors = canViewRepo.findByClient(clientId);
+        for(CanView sensor : canViewSensors) {
             clientSensors.add(sensorRepo.findById(sensor.getSensor()).get());
         }
 

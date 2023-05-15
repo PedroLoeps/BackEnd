@@ -12,7 +12,7 @@ public class Sensor {
     private String id;
 
     @Column(name = "Client")
-    private int client;
+    private String client;
 
     @Column(name = "Name")
     private String name;
@@ -29,11 +29,11 @@ public class Sensor {
         this.id = id;
     }
 
-    public int getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(int client) {
+    public void setClient(String client) {
         this.client = client;
     }
 
